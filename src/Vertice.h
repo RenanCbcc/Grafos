@@ -11,18 +11,17 @@ using namespace std;
 
 class Vertice {
 public:
-	Vertice(unsigned int id,int vrt);
-	void setVertice( int vrt );
-	int getVertice();
-
+	Vertice( int id);
 	void setVisitado( bool valor);
+	void setId(int _id);
+	int  getId();
 	bool getVisitado();
 
 
 private:
-	int vertice;
+
 	bool visitado;
-	unsigned int id;
+	int id;
 
 };
 

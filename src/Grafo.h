@@ -13,13 +13,19 @@
 class Grafo {
 public:
 	Grafo();
-
+	int nArestas();
+	int nVertices();
+	void setAresta(Vertice v, Vertice w);
+	void remAresta(Vertice v, Vertice w);
+	bool vazio();
+	void limpar();
 
 private:
 	bool direcionado;
 	list <Vertice*> lVertices;
 	list<Aresta *> cArestas;
 	Vertice * adjNaoVisitado ( unsigned int idn);
+
 
 };
 
