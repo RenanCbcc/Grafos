@@ -11,7 +11,8 @@ using namespace std;
 
 class Vertice {
 public:
-	Vertice( int id);
+	Vertice( int v);
+	int getNumero();
 	void setVisitado( bool valor);
 	void setId(int _id);
 	int  getId();

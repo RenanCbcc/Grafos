@@ -11,8 +11,7 @@
 class Aresta {
 public:
 	Aresta(Vertice *origem, Vertice *destino, int peso);
-
-	Vertice geOrigem();
+	Vertice getOrigem();
 	Vertice getDestino();
 	void setPeso( int p);
 	int  getPeso();
