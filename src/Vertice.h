@@ -12,11 +12,12 @@ using namespace std;
 class Vertice {
 public:
 	Vertice( int v);
-	int getNumero();
+
 	void setVisitado( bool valor);
+	bool getVisitado();
+
 	void setId(int _id);
 	int  getId();
-	bool getVisitado();
 
 
 private:

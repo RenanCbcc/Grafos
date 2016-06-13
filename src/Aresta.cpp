@@ -7,6 +7,13 @@
 
 #include "Aresta.h"
 
+Aresta::Aresta (){
+	this->origem = null;
+	this->destino = null;
+	this->peso = null;
+
+}
+
 Aresta::Aresta(Vertice *origem, Vertice *destino, int peso) {
 	// TODO Auto-generated constructor stub
 	this->origem = origem;
@@ -18,11 +25,11 @@ Aresta::Aresta(Vertice *origem, Vertice *destino, int peso) {
 // funções get
 //=========================================================
 
-Vertice Aresta::getOrigem(){
+Vertice* Aresta::getOrigem(){
 	return this->origem;
 }
 
-Vertice Aresta::getDestino(){
+Vertice* Aresta::getDestino(){
 	return this->destino;
 }
 

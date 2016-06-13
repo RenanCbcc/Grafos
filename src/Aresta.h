@@ -10,9 +10,10 @@
 
 class Aresta {
 public:
+	Aresta ();
 	Aresta(Vertice *origem, Vertice *destino, int peso);
-	Vertice getOrigem();
-	Vertice getDestino();
+	Vertice* getOrigem();
+	Vertice* getDestino();
 	void setPeso( int p);
 	int  getPeso();
 private:

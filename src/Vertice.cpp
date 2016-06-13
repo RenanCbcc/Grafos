@@ -9,11 +9,11 @@
 
 Vertice::Vertice(  int id) {
 	// TODO Auto-generated constructor stub
-	this->visitado = false;
-	this->id = id;
+	setVisitado(false);
+	setId( id );
 }
 
-// funções set
+// fun�oes set
 //=========================================================
 
 
@@ -26,7 +26,7 @@ void Vertice::setId(int id){
 }
 //=========================================================
 
-// funções get
+// fun�oes get
 //=========================================================
 
 bool Vertice::getVisitado(){
