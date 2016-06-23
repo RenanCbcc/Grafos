@@ -7,24 +7,31 @@
 
 #ifndef VERTICE_H_
 #define VERTICE_H_
+#include <vector>;
 using namespace std;
 
 class Vertice {
 public:
 	Vertice( int v);
-
+	Vertice();
 	void setVisitado( bool valor);
 	bool getVisitado();
 
 	void setId(int _id);
 	int  getId();
 
+	void setImput( int in);
+	int getImput();
+
+	void setOutput(int out);
+	int getOutput();
 
 private:
 
-	bool visitado;
 	int id;
-
+	int imput; // tempo inicial de busca do vertice;
+	int output;// tempo final de busca do vertice;
+	bool visitado;
 };
 
 #endif /* VERTICE_H_ */

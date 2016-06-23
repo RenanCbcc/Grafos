@@ -6,16 +6,31 @@
  */
 
 #include "Vertice.h"
+Vertice::Vertice(){
+	setVisitado(false);
+	setImput(0);
+	setOutput(0);
+}
 
 Vertice::Vertice(  int id) {
 	// TODO Auto-generated constructor stub
-	setVisitado(false);
 	setId( id );
 }
 
 // funçoes set
 //=========================================================
 
+void Vertice::setCor( String cor){
+	this.cor = cor;
+}
+
+void Vertice::setImput( int in){
+	this.imput = in;
+}
+
+void Vertice::setOutput( int out){
+	this.out = out;
+}
 
 void Vertice::setVisitado(bool vis){
 	this->visitado = vis;
@@ -29,11 +44,23 @@ void Vertice::setId(int id){
 // funçoes get
 //=========================================================
 
-bool Vertice::getVisitado(){
-	return this->visitado;
+String Vertice::getCor(){
+	return this->cor;
+}
+
+int Vertice::getImput(){
+	return this.imput;
+}
+
+int Vertice::getOutput(){
+	return this.output;
 }
 
 int Vertice::getId(){
 	return this->id;
+}
+
+bool Vertice::getVisitado(){
+	return this.visitado;
 }
 //=========================================================

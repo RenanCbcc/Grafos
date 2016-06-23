@@ -5,6 +5,17 @@
  *      Author: renan
  */
 
+#include "Grafo.h";
+using namespace std;
+void main(){
+	cou<< "Grafo implementado em C++" << endl;
+	Grafo graph = new Grafo();
 
+
+
+
+system("pause>0");
+
+};
 
 

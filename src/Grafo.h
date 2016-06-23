@@ -6,41 +6,41 @@
  */
 #include "Vertice.h"
 #include "Aresta.h"
-#include <list>
+#include <list> //Para lista de adjacia
+#include <queue> //Para Djikstra(?)
 #ifndef GRAFO_H_
 #define GRAFO_H_
 
 class Grafo {
 public:
-	Grafo( bool orientado = false);
-	int numero_Arestas();
-	int numero_Vertices();
-	Vertice retorna_Vertice(int v);
+	Grafo( bool orientado = true);
+	int numero_Arestas(); // Feito!
+	int numero_Vertices(); // Feito!
 	//==========================================================
 	//funçoes Void
-	void adicionar_Vertice (int identificador);
-	void adicionar_Aresta(Vertice v, Vertice w, int peso);
-	void remove_Aresta(Vertice v, Vertice w);
-	void limpar();
+	void adicionar_Vertice (); // Feito!
+	void remover_Vertice( int identificador); // Feito!
+	void adicionar_Aresta( vertice_Origem, vertide_Destino, int peso); // Feito!
+	void remover_Aresta( vertice_Origem, vertide_Destino); // Feito!
+	void limpar(); // Feito!
 	//==========================================================
 	// funçoes Bool
-	bool existe_Aresta(Vertice v, Vertice w,int peso);
-	bool esta_vazio();
-	bool existe_ciclo();
-	bool eh_conexo();
+	bool existe_Aresta( vertice_Origem, vertide_Destino); // Feito!
+	bool esta_vazio(); // Feito!
+	bool existe_ciclo(); // Nao Feito!
+	bool eh_conexo(); // Feito!
 	//==========================================================
 	// funçoes Busca
-	Vertice busca_vertice ( Vertice v );
-	void busca_Adjacente( int inicio);
-	void busca_Profundidade(int inicio);
-	void busca_Largura(int inicio);
+	Vertice buscar_Vertice ( vertice_Origem ); // Feito!
+	void buscar_Adjacente( int identificador); // Feito!
+	void buscar_Profundidade(int identificador); // Nao Feito!
+	void buscar_Profundidade( Vertice u ); // Nao Feito!
+	void buscar_Largura(int identificador); // Nao Feito!
+	bool buscar_Hamiltoniano(); // Nao Feito!
+	bool Buscar_Euleriano(); // Nao Feito!
 	//==========================================================
 
 private:
-	Aresta	aresta;
-	Vertice vertice;
-	int numero_Vertices = 0;
-	int numero_Arestas = 0;
 	bool orientado;
 	list<Vertice *> lista_Vertices;
 	list<Aresta *> lista_Arestas;
