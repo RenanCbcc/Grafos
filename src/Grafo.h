@@ -23,6 +23,8 @@ public:
 	void adicionar_Aresta( vertice_Origem, vertide_Destino, int peso); // Feito!
 	void remover_Aresta( vertice_Origem, vertide_Destino); // Feito!
 	void limpar(); // Feito!
+	void inicializar_Vertice_Fonte( Grafo graph,Vertice * s );
+	void relaxa_Vertice();
 	//==========================================================
 	// funçoes Bool
 	bool existe_Aresta( vertice_Origem, vertide_Destino); // Feito!
@@ -37,7 +39,8 @@ public:
 	void buscar_Profundidade( Vertice u ); // Nao Feito!
 	void buscar_Largura(int identificador); // Nao Feito!
 	bool buscar_Hamiltoniano(); // Nao Feito!
-	bool Buscar_Euleriano(); // Nao Feito!
+	bool buscar_Euleriano(); // Nao Feito!
+	Void Dijkstra(Grafo graph);
 	//==========================================================
 
 private:

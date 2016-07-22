@@ -126,7 +126,7 @@ bool Grafo::eh_Conexo(){
 
 
 void Grafo::buscar_Adjacencia( int identificador){
-	NoGrafo* idAdjacente = NULL;
+	Vertice* idAdjacente = NULL;
 	   list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
 
 	   while ( posicao_Aresta != lista_Arestas.end() )
@@ -172,6 +172,27 @@ void Grafo::buscar_Profundidade( Vertice *U){
 	U->setOutput( tempo + 1);
 };
 //=======================================================================================
+
+void Grafo::inicializar_Vertice_Fonte(Grafo graph, Vertice * fonte){
+	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+	while ( posicao_vertice != lista_Vertices.end() )
+		{
+		posicao_vertice->setEstimativa(-9999999);
+		}
+	fonte->setEstimativa(0);
+}
+
+void Grafo::relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w){
+	if u->getEstimativa() > v->getEstimativa() + w->getPeso(){
+		u->setEstimativa( v->getEstimativa() + w->getPeso() );
+		v->setPredecessor(u);
+	}
+
+}
+
+void Grafo::Dijkstra(Grafo graph){
+
+}
 
 Grafo::~Grafo() {
 	// TODO Auto-generated destructor stub

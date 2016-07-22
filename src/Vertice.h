@@ -26,12 +26,17 @@ public:
 	void setOutput(int out);
 	int getOutput();
 
-private:
+	void setEstimativa(int in);
+	int  getEstimativa();
 
+private:
+	vector <Vertice*> predecessores
 	int id;
-	int imput; // tempo inicial de busca do vertice;
-	int output;// tempo final de busca do vertice;
+	int imput; // tempo inicial de busca do vertice para busca em profundidade;
+	int output;// tempo final de busca do vertice para busca em profundidade;
+	int estimativa // tempo de um vertice Dijkstra;
 	bool visitado;
+
 };
 
 #endif /* VERTICE_H_ */

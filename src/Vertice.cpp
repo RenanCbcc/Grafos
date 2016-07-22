@@ -39,6 +39,14 @@ void Vertice::setVisitado(bool vis){
 void Vertice::setId(int id){
 	this->id = id;
 }
+
+void Vertice::setEstimativa(int in){
+	this->estimativa = in;
+}
+
+void Vertice::setPredecessor( Vertice *){
+	predecessores.push_back(Vertice *);
+}
 //=========================================================
 
 // funçoes get
@@ -63,4 +71,9 @@ int Vertice::getId(){
 bool Vertice::getVisitado(){
 	return this.visitado;
 }
+
+int Vertice::getEstimativa(){
+	return this.estimativa
+}
 //=========================================================
+
