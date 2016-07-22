@@ -123,15 +123,16 @@ bool Grafo::eh_Conexo(){
 
 };
 //=======================================================================================
+Aresta* Grafo::buscar_Aresta(Vertice* Origem,Vertice* destino)
+//=======================================================================================
 
-
-void Grafo::buscar_Adjacencia( int identificador){
+Vertice* Grafo::buscar_Adjacencia( Vertice* u){
 	Vertice* idAdjacente = NULL;
 	   list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
 
 	   while ( posicao_Aresta != lista_Arestas.end() )
 	   {
-		  if ( ( (*posicao_Aresta)->getOrigem()->getId() == id )  &&
+		  if ( ( (*posicao_Aresta)->getOrigem()->getId() == u->getIde() )  &&
 			   ( (*posicao_Aresta)->getDestino()->getVisitado() == false ))
 		  {
 			 idAdjacente = buscar_Vertice( (*posicao_Aresta)->getDestino()->getId() );
@@ -144,8 +145,6 @@ void Grafo::buscar_Adjacencia( int identificador){
 	   return idAdjacente;
 };
 //=======================================================================================
-
-
 void Grafo::buscar_Profundidade( int identificador ){
 	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
 	while ( posicao_vertice != lista_Vertices.end() )
@@ -190,9 +189,42 @@ void Grafo::relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w){
 
 }
 
-void Grafo::Dijkstra(Grafo graph){
+struct Comp_Prioridade
+{
+	bool operator()( Vertice* u, Vertice* v)
+	{
+		return u->getPrioridade > u->getPrioridade;
+	}
+};
 
-}
+void Grafo::Dijkstra(Grafo graph,Vertice* fonte){
+
+	inicializar_Vertice_Fonte(graph,fonte);
+
+	vector < Vertice *> conjuntoResposta;
+
+	priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila; // fila de prioridade
+	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+		while ( posicao_vertice != lista_Vertices.end() ){
+			Fila.push(posicao_vertice);
+		}
+	while( ! Fila.isempty() )
+	{
+		Vertice* u = Fila.pop;
+		conjuntoResposta.push_back(u);
+
+		while()
+		{
+			Vertice* v = buscar_Adjacencia(aux);
+			if (temp != null)
+			{
+				relaxa_Vertice(u,v,buscar_Aresta(u,v) );
+			}
+			else break;
+		}
+	}
+};
+//=======================================================================================
 
 Grafo::~Grafo() {
 	// TODO Auto-generated destructor stub
