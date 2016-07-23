@@ -47,6 +47,10 @@ void Vertice::setEstimativa(int in){
 void Vertice::setPredecessor( Vertice *){
 	predecessores.push_back(Vertice *);
 }
+
+void Vertice::setCor( String cor){
+	this.cor = cor;
+}
 //=========================================================
 
 // funçoes get
@@ -74,6 +78,10 @@ bool Vertice::getVisitado(){
 
 int Vertice::getEstimativa(){
 	return this.estimativa
+}
+
+String Vertice::getCor(){
+	return this.cor;
 }
 //=========================================================
 

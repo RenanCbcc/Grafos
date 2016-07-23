@@ -123,7 +123,27 @@ bool Grafo::eh_Conexo(){
 
 };
 //=======================================================================================
-Aresta* Grafo::buscar_Aresta(Vertice* Origem,Vertice* destino)
+Aresta* Grafo::buscar_Aresta(Vertice* Origem,Vertice* destino){
+	Aresta* aresta = NULL;
+
+	list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
+
+	   while ( posicao_Aresta != lista_Arestas.end() )
+	   {
+
+		  if (*posicao_Aresta)->getOrigem()->getId() == Origem->getId() )  &&
+		   ( (*posicao_Aresta)->getDestino()->getId() == destino->getId() ))
+		  {
+			 aresta = *posicao_Aresta;
+			 break;
+		  }
+
+		  posicao_Aresta++;
+	   }
+
+	   return aresta;
+
+};
 //=======================================================================================
 
 Vertice* Grafo::buscar_Adjacencia( Vertice* u){
@@ -145,11 +165,21 @@ Vertice* Grafo::buscar_Adjacencia( Vertice* u){
 	   return idAdjacente;
 };
 //=======================================================================================
-void Grafo::buscar_Profundidade( int identificador ){
-	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+
+void Grafo::buscar_Profundidade( Grafo graph ){
+	list<Vertice *>::iterator posicao_vertice = graph.lista_Vertices.begin();
+
+	while ( posicao_vertice != lista_Vertices.end() ){
+		lista_Vertices->setCor("Branco");
+		posicao_vertice++;
+	}
+
+	int Tempo = 0;
+	posicao_vertice = graph.lista_Vertices.begin();// volta para posição inicial da lista
+
 	while ( posicao_vertice != lista_Vertices.end() )
 	{
-		if ( posicao_vertice.getIsitado() == false ) // verica se o vertice jah foi visitado
+		if ( posicao_vertice.getCor() == "Branco" ) // verica se o vertice jah foi visitado
 		{
 			buscar_Profundidade( posicao_vertice ); // método recursivo;
 		}
@@ -157,23 +187,25 @@ void Grafo::buscar_Profundidade( int identificador ){
 	}
 
 };
-//=======================================================================================
 
-void Grafo::buscar_Profundidade( Vertice *U){
-	U->setVisitado(true)
-	U->setImput( tempo + 1 ) // está errado(?)
-	Vertice* V = buscar_Adjacencia( U->getId() );
-	if ( !V->getVisitado() )
-	{
-		busca_Profundidade( V );
-	}
+// acho que bastava verificar se o vertice foi ou não visitado :D
 
-	U->setOutput( tempo + 1);
+void Grafo::buscar_Profundidade( Vertice *u ){
+	u->setCor("Cinza");
+	u->setImput( ++tempo  );
+	Vertice* v = buscar_Adjacencia( u->getId() );
+		if ( v->getCor() == "Branco"  )
+		{
+			v->setPredecessor(u)
+			busca_Profundidade( v );
+		}
+	u->setCor("Preto");
+	u->setOutput( ++tempo);
 };
 //=======================================================================================
 
 void Grafo::inicializar_Vertice_Fonte(Grafo graph, Vertice * fonte){
-	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+	list<Vertice *>::iterator posicao_vertice = graph.lista_Vertices.begin();
 	while ( posicao_vertice != lista_Vertices.end() )
 		{
 		posicao_vertice->setEstimativa(-9999999);
@@ -193,7 +225,7 @@ struct Comp_Prioridade
 {
 	bool operator()( Vertice* u, Vertice* v)
 	{
-		return u->getPrioridade > u->getPrioridade;
+		return u->getEstimativa() > u->getEstimativa();
 	}
 };
 
@@ -201,27 +233,41 @@ void Grafo::Dijkstra(Grafo graph,Vertice* fonte){
 
 	inicializar_Vertice_Fonte(graph,fonte);
 
-	vector < Vertice *> conjuntoResposta;
+	list < Vertice *> conjuntoResposta;
 
-	priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila; // fila de prioridade
+	priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila; // cria a fila de prioridade
+
 	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
-		while ( posicao_vertice != lista_Vertices.end() ){
-			Fila.push(posicao_vertice);
+
+	while ( posicao_vertice != lista_Vertices.end() )
+		{
+			Fila.push_back(posicao_vertice); // insere todos os vertices na fila de prioridade
+			posicao_vertice++;
 		}
+
 	while( ! Fila.isempty() )
+
 	{
 		Vertice* u = Fila.pop;
-		conjuntoResposta.push_back(u);
+		conjuntoResposta.push_back(u); //lista
 
 		while()
 		{
-			Vertice* v = buscar_Adjacencia(aux);
-			if (temp != null)
+			Vertice* v = buscar_Adjacencia(u);
+			if ( v != null)
 			{
-				relaxa_Vertice(u,v,buscar_Aresta(u,v) );
+				relaxa_Vertice( u, v, buscar_Aresta(u,v) );
 			}
 			else break;
 		}
+	}
+
+	cout << "Distancia do Vertice " fonte->getId() "para todos os outros: " << endl;
+	list<Vertice *>::iterator posicao_vertice = conjuntoResposta.begin();
+
+	while ( posicao_vertice != conjuntoResposta.end()){
+cout << "[ " <<fonte->getId() <<"]------------>["<< posicao_vertice->getId() <<"]" << posicao_vertice->getEstimativa() << endl;
+		posicao_vertice++;
 	}
 };
 //=======================================================================================

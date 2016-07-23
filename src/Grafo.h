@@ -8,7 +8,6 @@
 #include "Aresta.h"
 #include <list> //Para lista de adjacia
 #include <queue> //Para Djikstra(?)
-#include <vector>
 #ifndef GRAFO_H_
 #define GRAFO_H_
 
@@ -26,7 +25,7 @@ public:
 	void limpar(); // Feito!
 	void inicializar_Vertice_Fonte( Grafo graph,Vertice * s );
 	void relaxa_Vertice();
-	void Dijkstra(Grafo graph);
+	void Dijkstra(Grafo graph); //Feito!;
 	//==========================================================
 	// funçoes Bool
 	bool esta_vazio(); // Feito!
@@ -37,7 +36,7 @@ public:
 	// funçoes Busca
 	Vertice* buscar_Vertice ( Vertice* Origem ); // Feito!
 	Vertice* buscar_Adjacente( int identificador); // Feito!
-	Aresta * buscar_Aresta(Vertice* Origem,Vertice* destino)
+	Aresta * buscar_Aresta(Vertice* Origem,Vertice* destino) //Feito!
 	void buscar_Profundidade(int identificador); // Nao Feito!
 	void buscar_Profundidade( Vertice u ); // Nao Feito!
 	void buscar_Largura(int identificador); // Nao Feito!
