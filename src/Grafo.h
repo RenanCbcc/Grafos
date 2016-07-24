@@ -27,6 +27,8 @@ public:
 	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra(Grafo graph); //Feito!;
 	void ordenação_Topologica(); // Não Feito!
+	void grafo_Transposto(); // Não feito
+	void Bellman_Ford(Grafo graph, Vertice* s);
 	//==========================================================
 	// funÃ§oes Bool
 	bool esta_vazio(); // Feito!

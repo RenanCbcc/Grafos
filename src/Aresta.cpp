@@ -12,7 +12,7 @@ Aresta::Aresta (){
 	this->destino = null;
 	this->peso = null;
 
-}
+};
 
 Aresta::Aresta(Vertice *origem, Vertice *destino, int peso) {
 	// TODO Auto-generated constructor stub
@@ -20,24 +20,24 @@ Aresta::Aresta(Vertice *origem, Vertice *destino, int peso) {
 	this->destino = destino;
 	this->peso = peso;
 
-}
+};
 
 // funções get
 //=========================================================
 
 Vertice* Aresta::getOrigem(){
 	return this->origem;
-}
+};
 
 Vertice* Aresta::getDestino(){
 	return this->destino;
-}
+};
 
 int Aresta::getPeso(){
 	return this->peso;
-}
+};
 //=========================================================
 
 void Aresta::setPeso(int p){
 	this->peso = p;
-}
+};

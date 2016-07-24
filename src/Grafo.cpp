@@ -328,6 +328,23 @@ void Grafo::Dijkstra(Grafo graph,Vertice* fonte){
 };
 //=======================================================================================
 
+void Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
+	inicializar_Vertice_Fonte(graph,fonte);
+	for ( int i=0; i< numero_Vertices()-1; i++ )
+	{
+		list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
+		while ( posicao_Aresta != lista_Arestas.end() )
+		{
+			relaxa_Vertice( (*posicao_Aresta)->getOrigem(),(*posicao_Aresta)->getDestino(), posicao_Aresta );
+			posicao_Aresta++;
+			//continuo depois :p
+		}
+
+	}
+
+};
+//=======================================================================================
+
 Grafo::~Grafo() {
 	// TODO Auto-generated destructor stub
 	lista_Arestas.clear();

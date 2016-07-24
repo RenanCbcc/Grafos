@@ -17,7 +17,7 @@ public:
 	void setVisitado( bool valor);
 	bool getVisitado();
 
-	void setId(int _id);
+	void setId(int id);
 	int  getId();
 
 	void setImput( int in);
@@ -31,7 +31,7 @@ public:
 
 
 private:
-	vector <Vertice*> predecessores
+	vector <Vertice*> predecessores;
 	int id;
 	int imput; // tempo inicial de busca do vertice para busca em profundidade;
 	int output;// tempo final de busca do vertice para busca em profundidade;
