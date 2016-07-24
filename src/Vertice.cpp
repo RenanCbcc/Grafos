@@ -19,11 +19,6 @@ Vertice::Vertice(  int id) {
 
 // funçoes set
 //=========================================================
-
-void Vertice::setCor( String cor){
-	this.cor = cor;
-}
-
 void Vertice::setImput( int in){
 	this.imput = in;
 }
@@ -44,21 +39,13 @@ void Vertice::setEstimativa(int in){
 	this->estimativa = in;
 }
 
-void Vertice::setPredecessor( Vertice *){
-	predecessores.push_back(Vertice *);
-}
-
-void Vertice::setCor( String cor){
-	this.cor = cor;
+void Vertice::setPredecessor( Vertice *u){
+	predecessores.push_back(u);
 }
 //=========================================================
 
 // funçoes get
 //=========================================================
-
-String Vertice::getCor(){
-	return this->cor;
-}
 
 int Vertice::getImput(){
 	return this.imput;
@@ -80,8 +67,5 @@ int Vertice::getEstimativa(){
 	return this.estimativa
 }
 
-String Vertice::getCor(){
-	return this.cor;
-}
 //=========================================================
 

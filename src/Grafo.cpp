@@ -6,6 +6,8 @@
  */
 
 #include "Grafo.h"
+#define INFINITO 9999999;
+static int TEMPO = 0;
 using namespace std;
 
 //=======================================================================================
@@ -118,7 +120,7 @@ bool Grafo::eh_Conexo(){
 	list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
 
 		   while ( posicao_Aresta != lista_Arestas.end() ){
-
+			   // terminar de implementar!
 		   }
 
 };
@@ -147,12 +149,12 @@ Aresta* Grafo::buscar_Aresta(Vertice* Origem,Vertice* destino){
 //=======================================================================================
 
 Vertice* Grafo::buscar_Adjacencia( Vertice* u){
-	Vertice* idAdjacente = NULL;
+	Vertice* Adjacente = NULL;
 	   list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
 
 	   while ( posicao_Aresta != lista_Arestas.end() )
 	   {
-		  if ( ( (*posicao_Aresta)->getOrigem()->getId() == u->getIde() )  &&
+		  if ( ( (*posicao_Aresta)->getOrigem()->getId() == u->getId() )  &&
 			   ( (*posicao_Aresta)->getDestino()->getVisitado() == false ))
 		  {
 			 idAdjacente = buscar_Vertice( (*posicao_Aresta)->getDestino()->getId() );
@@ -162,7 +164,7 @@ Vertice* Grafo::buscar_Adjacencia( Vertice* u){
 		  posicao_Aresta++;
 	   }
 
-	   return idAdjacente;
+	   return Adjacente;
 };
 //=======================================================================================
 
@@ -170,7 +172,7 @@ void Grafo::buscar_Profundidade( Grafo graph ){
 	list<Vertice *>::iterator posicao_vertice = graph.lista_Vertices.begin();
 
 	while ( posicao_vertice != lista_Vertices.end() ){
-		lista_Vertices->setCor("Branco");
+		lista_Vertices->setVisitado(false);
 		posicao_vertice++;
 	}
 
@@ -179,7 +181,7 @@ void Grafo::buscar_Profundidade( Grafo graph ){
 
 	while ( posicao_vertice != lista_Vertices.end() )
 	{
-		if ( posicao_vertice.getCor() == "Branco" ) // verica se o vertice jah foi visitado
+		if ( posicao_vertice.getVisitado() == false ) // verica se o vertice jah foi visitado
 		{
 			buscar_Profundidade( posicao_vertice ); // método recursivo;
 		}
@@ -188,38 +190,87 @@ void Grafo::buscar_Profundidade( Grafo graph ){
 
 };
 
-// acho que bastava verificar se o vertice foi ou não visitado :D
+void Grafo::buscar_Profundidade( Vertice *u ){ // função que visita recursivamente os vertice
+	u->setVisitado(true);
+	u->setImput( ++TEMPO  );
 
-void Grafo::buscar_Profundidade( Vertice *u ){
-	u->setCor("Cinza");
-	u->setImput( ++tempo  );
-	Vertice* v = buscar_Adjacencia( u->getId() );
-		if ( v->getCor() == "Branco"  )
+	Vertice* v = buscar_Adjacencia( u );
+		if ( v->getVisitado() == false  )
 		{
+
 			v->setPredecessor(u)
 			busca_Profundidade( v );
 		}
-	u->setCor("Preto");
-	u->setOutput( ++tempo);
+	u->setVisitado(true);
+	u->setOutput( ++TEMPO);
 };
 //=======================================================================================
 
+void Grafo::buscar_Largura(Grafo graph,Vertice * fonte){
+	list<Vertice *>::iterator posicao_vertice = graph.lista_Vertices.begin();
+		while ( posicao_vertice != lista_Vertices.end() )
+		{
+			posicao_vertice->setVisitado(false);
+			posicao_vertice->setEstimativa(INFINITO);
+		}
+
+	s->setVisitado(true);
+	s->setEstimativa(0);
+	priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila;//ordenan vertices por menor prioridade
+	Fila.push(s);
+
+	while( !Fila.empty() )
+		{
+			Vertice* u = Fila.top(); // recebe o primeiro elemento da fila
+			Vertice* v = busca_Adjacente(u); // função retorna NULL se não existe adj
+			if ( v == NULL){
+				Fila.pop(); // retira o primeiro elemento da fila
+			}
+			else
+			{
+				v->setVisitado(true);
+				v->getEstimativa( ++TEMPO);
+				v->setPredecessor(u);
+				Fila.push(v);
+			}
+		u->setVisitado(true);
+
+		}
+
+	cout << "Distancia do Vertice " fonte->getId() "para todos os outros: " << endl;
+		list<Vertice *>::iterator posicao_vertice = conjuntoResposta.begin();
+
+		while ( posicao_vertice != conjuntoResposta.end())
+		{
+			// imprimir também a lista de predecessores de cada vertice
+			cout << "[ " <<fonte->getId() <<"]------------>["<< posicao_vertice->getId() <<"] : " << posicao_vertice->getEstimativa() << endl;
+			posicao_vertice++;
+		}
+
+
+};
+//=======================================================================================
+
+
 void Grafo::inicializar_Vertice_Fonte(Grafo graph, Vertice * fonte){
 	list<Vertice *>::iterator posicao_vertice = graph.lista_Vertices.begin();
+
 	while ( posicao_vertice != lista_Vertices.end() )
 		{
-		posicao_vertice->setEstimativa(-9999999);
+		posicao_vertice->setEstimativa(INFINITO);
 		}
 	fonte->setEstimativa(0);
-}
+};
 
 void Grafo::relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w){
-	if u->getEstimativa() > v->getEstimativa() + w->getPeso(){
+
+	if (u->getEstimativa() > v->getEstimativa() + w->getPeso())
+	{
 		u->setEstimativa( v->getEstimativa() + w->getPeso() );
 		v->setPredecessor(u);
 	}
 
-}
+};
 
 struct Comp_Prioridade
 {
@@ -245,28 +296,33 @@ void Grafo::Dijkstra(Grafo graph,Vertice* fonte){
 			posicao_vertice++;
 		}
 
-	while( ! Fila.isempty() )
+	while( ! Fila.empty() )
 
 	{
-		Vertice* u = Fila.pop;
+		Vertice* u = Fila.top;
 		conjuntoResposta.push_back(u); //lista
+		Vertice* v = buscar_Adjacencia(u);
 
-		while()
-		{
-			Vertice* v = buscar_Adjacencia(u);
-			if ( v != null)
-			{
-				relaxa_Vertice( u, v, buscar_Aresta(u,v) );
-			}
-			else break;
-		}
+		if ( v == NULL)
+				{
+					Fila.pop(); // retiro vertice sem adj da fila
+				}
+
+			else
+				{
+					v->setVisitado(true);
+
+					relaxa_Vertice( u, v, buscar_Aresta(u,v) );
+
+				}
 	}
 
 	cout << "Distancia do Vertice " fonte->getId() "para todos os outros: " << endl;
 	list<Vertice *>::iterator posicao_vertice = conjuntoResposta.begin();
 
-	while ( posicao_vertice != conjuntoResposta.end()){
-cout << "[ " <<fonte->getId() <<"]------------>["<< posicao_vertice->getId() <<"]" << posicao_vertice->getEstimativa() << endl;
+	while ( posicao_vertice != conjuntoResposta.end())
+	{
+		cout << "[ " <<fonte->getId() <<"]------------>["<< posicao_vertice->getId() <<"] : " << posicao_vertice->getEstimativa() << endl;
 		posicao_vertice++;
 	}
 };

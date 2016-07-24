@@ -29,8 +29,6 @@ public:
 	void setEstimativa(int in);
 	int  getEstimativa();
 
-	void setCor( String cor);
-	String getCor();
 
 private:
 	vector <Vertice*> predecessores
@@ -39,7 +37,7 @@ private:
 	int output;// tempo final de busca do vertice para busca em profundidade;
 	int estimativa // tempo de um vertice Dijkstra;
 	bool visitado;
-	String cor;
+
 };
 
 #endif /* VERTICE_H_ */

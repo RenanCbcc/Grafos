@@ -23,23 +23,23 @@ public:
 	void adicionar_Aresta( vertice_Origem, vertide_Destino, int peso); // Feito!
 	void remover_Aresta( vertice_Origem, vertide_Destino); // Feito!
 	void limpar(); // Feito!
-	void inicializar_Vertice_Fonte( Grafo graph,Vertice * s );
-	void relaxa_Vertice();
+	void inicializar_Vertice_Fonte( Grafo graph,Vertice * s ); //Feito!
+	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra(Grafo graph); //Feito!;
+	void ordenaÁ„o_Topologica(); // N„o Feito!
 	//==========================================================
 	// fun√ßoes Bool
 	bool esta_vazio(); // Feito!
-	bool existe_ciclo(); // Nao Feito!
+	bool buscar_ciclo(); // Nao Feito!
 	bool eh_conexo(); // Feito!
-	bool operator ()( Vertice* u, Vertice* v);
 	//==========================================================
 	// fun√ßoes Busca
 	Vertice* buscar_Vertice ( Vertice* Origem ); // Feito!
-	Vertice* buscar_Adjacente( int identificador); // Feito!
+	Vertice* buscar_Adjacente( int identificador); // Feito!//vertice adj n„o visitado
 	Aresta * buscar_Aresta(Vertice* Origem,Vertice* destino) //Feito!
-	void buscar_Profundidade(int identificador); // Nao Feito!
-	void buscar_Profundidade( Vertice u ); // Nao Feito!
-	void buscar_Largura(int identificador); // Nao Feito!
+	void buscar_Profundidade(Grafo graph); // Feito!
+	void buscar_Profundidade( Vertice* u ); // Quase Feito!
+	void buscar_Largura(Grafo graph,Vertice * s); // Quase Feito!
 	bool buscar_Hamiltoniano(); // Nao Feito!
 	bool buscar_Euleriano(); // Nao Feito!
 	//==========================================================
