@@ -328,20 +328,99 @@ void Grafo::Dijkstra(Grafo graph,Vertice* fonte){
 };
 //=======================================================================================
 
-void Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
+bool Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
 	inicializar_Vertice_Fonte(graph,fonte);
+
 	for ( int i=0; i< numero_Vertices()-1; i++ )
 	{
-		list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
+		list< Aresta *>::iterator posicao_Aresta = lista_Arestas.begin();
+
 		while ( posicao_Aresta != lista_Arestas.end() )
 		{
 			relaxa_Vertice( (*posicao_Aresta)->getOrigem(),(*posicao_Aresta)->getDestino(), posicao_Aresta );
 			posicao_Aresta++;
-			//continuo depois :p
+
 		}
 
 	}
 
+	list< Aresta *>::iterator posicao_Aresta = lista_Arestas.begin();
+	while ( posicao_Aresta != lista_Arestas.end() )
+	{
+		if (u->getEstimativa() > v->getEstimativa() + w->getPeso())
+			{
+				return false;
+			}
+
+	}
+
+	return true;
+
+};
+//=======================================================================================
+
+bool arvore_Geradora_Minima( Vertice *u){
+	bool retorno = false;
+		unsigned int vertices_Checados = 0;
+		list< Aresta *> arvore;
+
+		Vertice* vertice = buscar_Vertice ( u );
+		Aresta* aresta = NULL;
+
+		std::stack<unsigned int> *pilha_Vertices = new std::stack<unsigned int>;
+
+		pilha_Vertices->push( vertice );
+		vertices_Checados++;
+
+		vertice->setVisitado(true);
+
+		while ( !(pilha_Vertices->empty()) )
+		{
+
+
+		   v = busca_Adjacente( pilha_Vertices->top() ); // será que isso funciona?
+
+		   if ( v == NULL) // sem mais nos adjacentes
+		   {
+			   pilha_Vertices->pop();
+		   }
+		   else
+		   {
+			  v->setVisitado( true ); //marca como visitado
+			  pilha_Vertices->push( v ); //coloca na pilha
+			  vertices_Checados++++; //contagem de nos checados
+			  aresta = buscar_Aresta( , v );
+			  if ( ( aresta == NULL )
+					{
+				  	  aresta = buscar_Aresta ( v ,  );
+					}
+
+			  if ( aresta != NULL )
+			  {
+	             arvore.push_back(aresta);
+			     aresta = NULL;
+			  }
+
+		   }
+		}
+
+		//limpa nos visitados
+		list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+
+			while ( posicao_vertice != lista_Vertices.end() )
+		{
+	       (*posicao_vertice)->setVisitado(false);
+	       posicao_vertice++;
+		}
+
+		caminhoArestas.clear();
+		if ( numeroNosChecados == numero_Vertices() )
+		{
+		   retorno = true;
+		   caminhoArestas = arvore;
+		}
+
+		return retorno;
 };
 //=======================================================================================
 

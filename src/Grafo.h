@@ -28,20 +28,21 @@ public:
 	void Dijkstra(Grafo graph); //Feito!;
 	void ordenaÁ„o_Topologica(); // N„o Feito!
 	void grafo_Transposto(); // N„o feito
-	void Bellman_Ford(Grafo graph, Vertice* s);
 	//==========================================================
 	// fun√ßoes Bool
 	bool esta_vazio(); // Feito!
 	bool buscar_ciclo(); // Nao Feito!
 	bool eh_conexo(); // Feito!
+	bool Bellman_Ford(Grafo graph, Vertice* s); // Feito!
+	bool arvore_Geradora_Minima( Vertice *u); // Quase Feito!
 	//==========================================================
 	// fun√ßoes Busca
 	Vertice* buscar_Vertice ( Vertice* Origem ); // Feito!
 	Vertice* buscar_Adjacente( int identificador); // Feito!//vertice adj n„o visitado
 	Aresta * buscar_Aresta(Vertice* Origem,Vertice* destino) //Feito!
 	void buscar_Profundidade(Grafo graph); // Feito!
-	void buscar_Profundidade( Vertice* u ); // Quase Feito!
-	void buscar_Largura(Grafo graph,Vertice * s); // Quase Feito!
+	void buscar_Profundidade( Vertice* u ); //Feito!
+	void buscar_Largura(Grafo graph,Vertice * s); //Quase Feito!
 	bool buscar_Hamiltoniano(); // Nao Feito!
 	bool buscar_Euleriano(); // Nao Feito!
 	//==========================================================
