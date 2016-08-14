@@ -32,7 +32,7 @@ public:
 
 private:
 	vector <Vertice*> predecessores;
-	int id;
+	int id;		// identificador do vertice
 	int imput; // tempo inicial de busca do vertice para busca em profundidade;
 	int output;// tempo final de busca do vertice para busca em profundidade;
 	int estimativa // tempo de um vertice Dijkstra;
