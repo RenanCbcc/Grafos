@@ -43,7 +43,7 @@ void main(){
 					break;
 				case 4:
 					system("cls");
-					DisplayMessage();
+					Questao_Nove();
 					cout <<"\n";
 					break;
 				case 5:
@@ -86,7 +86,7 @@ system("pause>0");
 };
 
 
-void Questao_seis(){
+void Questao_Seis(){
 	Grafo graph = new Grafo();
 	for(int i = 0; i< 9 i++){
 		graph.adicionar_Vetice(); // adiciona 9 vertices
@@ -106,6 +106,25 @@ void Questao_seis(){
 	graph.adicionar_Aresta(3,0,0);
 	graph.adicionar_Aresta(9,7,0);
 
-
 	graph.buscar_Profundidade();
+};
+
+void Questao_Nove(){
+	graph.adicionar_Aresta(0,2,0);
+	graph.adicionar_Aresta(0,3,0);
+	graph.adicionar_Aresta(1,8,0);
+	graph.adicionar_Aresta(1,4,0);
+	graph.adicionar_Aresta(2,5,0);
+	graph.adicionar_Aresta(3,7,0);
+	graph.adicionar_Aresta(3,8,0);
+	graph.adicionar_Aresta(4,8,0);
+	graph.adicionar_Aresta(5,6,0);
+	graph.adicionar_Aresta(6,2,0);
+	graph.adicionar_Aresta(7,9,0);
+	graph.adicionar_Aresta(3,0,0);
+	graph.adicionar_Aresta(9,7,0);
+
+	graph.busca_Largura(1);
+	graph.imprimi_Grafo(1,9);
+
 };

@@ -18,17 +18,18 @@ public:
 	int numero_Vertices(); // Feito!
 	//==========================================================
 	//fun√ßoes Void
-	void adicionar_Vetice(); // Feito!
-	void remover_Vertice( int identificador); // Feito!
-	void adicionar_Aresta( int vertice_Origem, int vertide_Destino, int peso); // Feito!
-	void remover_Aresta( int vertice_Origem, int vertide_Destino); // Feito!
+	void adiciona_Vetice(); // Feito!
+	void remove_Vertice( int identificador); // Feito!
+	void adiciona_Aresta( int vertice_Origem, int vertide_Destino, int peso); // Feito!
+	void remove_Aresta( int vertice_Origem, int vertice_Destino); // Feito!
 	void limpar(); // Feito!
-	void inicializar_Vertice_Fonte( Vertice * s ); //Feito!
+	void inicializa_Vertice_Fonte( Vertice * s ); //Feito!
 	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra( int vertice_Origem ); //Feito!;
 	void ordenaÁ„o_Topologica(); // N„o Feito!
 	void grafo_Transposto(); // N„o feito
 	void arvore_Geradora_Minima( int vertice_Origem); // Feito!
+	void imprimi_Grafo(int vertice_Origem, int vertice_Destino); // Quase Feito!;
 	//==========================================================
 	// fun√ßoes Bool
 	bool esta_vazio(); // Feito!
@@ -37,14 +38,15 @@ public:
 	bool Bellman_Ford(Grafo graph, Vertice* s); // Feito!
 	//==========================================================
 	// fun√ßoes Busca
-	Vertice* buscar_Vertice ( int vertice_Origem ); // Feito!
-	Vertice* buscar_Adjacente( int identificador); // Feito!//vertice adj n„o visitado
-	Aresta * buscar_Aresta(Vertice* Origem,Vertice* destino) //Feito!
-	void buscar_Profundidade(Grafo graph); // Feito!
-	void buscar_Profundidade( Vertice* u ); //Feito!
+	Vertice* busca_Vertice ( int vertice_Origem ); // Feito!
+	Vertice* busca_Adjacente( int identificador); // Feito!//vertice adj n„o visitado
+	Aresta * busca_Aresta(Vertice* Origem,Vertice* destino) //Feito!
+	void busca_Profundidade(Grafo graph); // Feito!
+	void busca_Profundidade( Vertice* u ); //Feito!
+	Vertice *busca_Profundidade( Vertice *u )
 	void buscar_Largura( int vertice_Origem ); //  Feito!
-	bool buscar_Hamiltoniano(); // Nao Feito!
-	bool buscar_Euleriano(); // Nao Feito!
+	bool buscar_cicloHamiltoniano(); // Nao Feito!
+	bool buscar_cicloEuleriano(); // Quase Feito!
 	//==========================================================
 
 private:
