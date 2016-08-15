@@ -8,12 +8,13 @@
 #include "Aresta.h"
 #include <list> //Para lista de adjacia
 #include <queue> //Para Djikstra(?)
+#include <stack> // Para achar componemtes conexos
 #ifndef GRAFO_H_
 #define GRAFO_H_
 
 class Grafo {
 public:
-	Grafo( bool orientado = true);
+	Grafo();
 	int numero_Arestas(); // Feito!
 	int numero_Vertices(); // Feito!
 	//==========================================================
@@ -27,13 +28,13 @@ public:
 	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra( int vertice_Origem ); //Feito!;
 	void ordenação_Topologica(); // Não Feito!
-	void grafo_Transposto(); // Não feito
+	void grafo_Transposto(); // Feito
 	void arvore_Geradora_Minima( int vertice_Origem); // Feito!
 	void imprimi_Grafo(int vertice_Origem, int vertice_Destino); // Quase Feito!;
 	//==========================================================
 	// funÃ§oes Bool
 	bool esta_vazio(); // Feito!
-	bool buscar_ciclo(); // Nao Feito!
+	bool busca_ciclo(); //Feito!
 	bool eh_conexo(); // Feito!
 	bool Bellman_Ford(Grafo graph, Vertice* s); // Feito!
 	//==========================================================
@@ -54,6 +55,7 @@ private:
 	list<Vertice *> lista_Vertices;
 	list<Aresta *> lista_Arestas;
 	list<Aresta *> lista_Arvore;
+	stack <Vertice*> pilha_Vertices;
 };
 
 #endif /* GRAFO_H_ */
