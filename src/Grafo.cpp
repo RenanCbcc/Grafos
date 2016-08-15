@@ -29,7 +29,7 @@ int Grafo::numero_Vertices(){
 //=======================================================================================
 
 void Grafo::adicionar_Vetice(){
-	Vertice *vertice = new Vertice( lista_Vertices.size() );
+	Vertice *vertice = new Vertice( numero_Vertices() );
 	lista_Vertices.push_back( vertice );
 };
 //=======================================================================================
@@ -187,6 +187,28 @@ void Grafo::buscar_Profundidade(){
 		posicao_vertice++;
 	}
 
+
+
+	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+			while ( posicao_vertice != lista_Vertices.end() )
+			{
+				cout << "Estimativa de [" <<posicao_vertice.getId() <<"] ==> " <<posicao_vertice.getEstimativa << endl;
+
+				if ( posicao_vertice->predecessores.empty() )
+				{
+					posicao_vertice++;
+					break;
+				}
+				cout << "Predecesores de [" <<posicao_vertice.getId() << "] ==> " << endl;
+				for ( int i = 0; posicao_vertice->predecessor.size(); i++  )
+				{
+					cout << posicao_vertice.getPredecessor();
+				}
+
+				posicao_vertice++;
+
+			}
+
 };
 
 void Grafo::buscar_Profundidade( Vertice *u ){ // função que visita recursivamente os vertice
@@ -197,7 +219,7 @@ void Grafo::buscar_Profundidade( Vertice *u ){ // função que visita recursivamen
 		if ( v->getVisitado() == false  )
 		{
 
-			v->setPredecessor(u)
+			v->setPredecessor(u->getId());
 			busca_Profundidade( v );
 		}
 	u->setVisitado(true);
@@ -205,8 +227,23 @@ void Grafo::buscar_Profundidade( Vertice *u ){ // função que visita recursivamen
 };
 //=======================================================================================
 
+void Grafo::imprimir_Grafo(){
+	list< Aresta *>::iterator posicao_Aresta = lista_Arestas.begin();
+
+			Vertice * origem,*destino;
+			while ( posicao_Aresta != lista_Arestas.end() )
+			{
+				origem = posicao_Aresta.getOrigem();
+				destino = posicao_Aresta.getDestino();
+				cout <<"[ " << origem->getId() "]======>"
+			}
+};
+
+//=======================================================================================
+
+
 void Grafo::buscar_Largura( int vertice_Origem ){
-	list<Vertice *>::iterator posicao_vertice = graph.lista_Vertices.begin();
+	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
 		while ( posicao_vertice != lista_Vertices.end() )
 		{
 			posicao_vertice->setVisitado(false);
@@ -230,7 +267,7 @@ void Grafo::buscar_Largura( int vertice_Origem ){
 			{
 				v->setVisitado(true);
 				v->getEstimativa( ++TEMPO);
-				v->setPredecessor(u);
+				v->setPredecessor(u->getId());
 				Fila.push(v);
 			}
 		u->setVisitado(true);
@@ -250,7 +287,6 @@ void Grafo::buscar_Largura( int vertice_Origem ){
 
 };
 //=======================================================================================
-
 
 void Grafo::inicializar_Vertice_Fonte( Vertice * fonte){
 	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();

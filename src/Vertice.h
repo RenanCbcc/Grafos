@@ -12,26 +12,29 @@ using namespace std;
 
 class Vertice {
 public:
-	Vertice( int v);
+	Vertice( int id );
 	Vertice();
-	void setVisitado( bool valor);
+	void setVisitado( bool valor );
 	bool getVisitado();
 
 	void setId(int id);
 	int  getId();
 
-	void setImput( int in);
+	void setImput( int in );
 	int getImput();
 
-	void setOutput(int out);
+	void setOutput(int out );
 	int getOutput();
 
-	void setEstimativa(int in);
+	void setEstimativa(int in );
 	int  getEstimativa();
+
+	void setPredecessor();
+	int  getPredecessor();
 
 
 private:
-	vector <Vertice*> predecessores;
+	vector <int> predecessores;
 	int id;		// identificador do vertice
 	int imput; // tempo inicial de busca do vertice para busca em profundidade;
 	int output;// tempo final de busca do vertice para busca em profundidade;

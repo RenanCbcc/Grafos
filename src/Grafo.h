@@ -18,7 +18,7 @@ public:
 	int numero_Vertices(); // Feito!
 	//==========================================================
 	//funçoes Void
-	void adicionar_Vertice (); // Feito!
+	void adicionar_Vetice(); // Feito!
 	void remover_Vertice( int identificador); // Feito!
 	void adicionar_Aresta( int vertice_Origem, int vertide_Destino, int peso); // Feito!
 	void remover_Aresta( int vertice_Origem, int vertide_Destino); // Feito!

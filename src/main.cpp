@@ -9,7 +9,6 @@
 using namespace std;
 void main(){
 	cout<< "Grafo implementado em C++" << endl;
-	Grafo graph = new Grafo();
 
 	int aux;
 		do{
@@ -30,7 +29,7 @@ void main(){
 			switch (aux){
 				case 1:
 					system("cls");
-					Gps();
+					Questao_seis();
 
 					break;
 				case 2:
@@ -87,3 +86,26 @@ system("pause>0");
 };
 
 
+void Questao_seis(){
+	Grafo graph = new Grafo();
+	for(int i = 0; i< 9 i++){
+		graph.adicionar_Vetice(); // adiciona 9 vertices
+	}
+
+	graph.adicionar_Aresta(0,2,0);
+	graph.adicionar_Aresta(0,3,0);
+	graph.adicionar_Aresta(1,8,0);
+	graph.adicionar_Aresta(1,4,0);
+	graph.adicionar_Aresta(2,5,0);
+	graph.adicionar_Aresta(3,7,0);
+	graph.adicionar_Aresta(3,8,0);
+	graph.adicionar_Aresta(4,8,0);
+	graph.adicionar_Aresta(5,6,0);
+	graph.adicionar_Aresta(6,2,0);
+	graph.adicionar_Aresta(7,9,0);
+	graph.adicionar_Aresta(3,0,0);
+	graph.adicionar_Aresta(9,7,0);
+
+
+	graph.buscar_Profundidade();
+};

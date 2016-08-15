@@ -12,7 +12,7 @@ Vertice::Vertice(){
 	setOutput(0);
 };
 
-Vertice::Vertice(  int id) {
+Vertice::Vertice(  int id ) {
 	// TODO Auto-generated constructor stub
 	setId( id );
 };
@@ -39,7 +39,7 @@ void Vertice::setEstimativa(int in){
 	this->estimativa = in;
 };
 
-void Vertice::setPredecessor( Vertice *u){
+void Vertice::setPredecessor( int u){
 	predecessores.push_back(u);
 };
 //=========================================================
@@ -66,5 +66,9 @@ bool Vertice::getVisitado(){
 int Vertice::getEstimativa(){
 	return this.estimativa
 };
+
+int Vertice::getPredecessor(){
+	return predecessores.front();
+}
 //=========================================================
 
