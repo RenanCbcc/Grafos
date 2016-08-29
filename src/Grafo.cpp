@@ -14,12 +14,23 @@ using namespace std;
 
 Grafo::Grafo() {
 	// TODO Auto-generated constructor stub
-	this.orientado = true;
+	this.direcionado = true;
+	lista_Vertices = new list <Vertices*>;
+	lista_Arestas = new list <Arestas*>;
+	lista_Arvore = new listlist <Arestas*>;
+	pilha_Vertices = new stack < Vertices*>;
+};
+//=======================================================================================
+
+Grafo::Grafo(bool direcionado) {
+	// TODO Auto-generated constructor stub
+	this.direcionado = direcionado ;
 	lista_Vertices = new list <Vertices*>;
 	lista_Arestas = new list <Arestas*>;
 	lista_Arvore = new listlist <Arestas*>;
 	pilha_Vertices = new stack < Vertices*>;
 }
+
 //=======================================================================================
 
 int Grafo::numero_Aerstas(){
@@ -87,7 +98,7 @@ void Grafo::adiciona_Aresta( int idOrigem, int idDestino, int peso ){
 			cout << "Erro na função injetora"; << endl; break;
 			}
 
-	else if ( orientado = false)
+	else if ( direcionado = false)
 	{
 
 			Aresta *aresta = new Aresta(origem,destino, peso);
@@ -121,7 +132,6 @@ void Grafo::remove_Aresta(int idOrigem, int idDestino){
 
 
 	}
-
 
 	else
 	{
@@ -158,8 +168,8 @@ bool Grafo::eh_Conexo(){
 };
 //=======================================================================================
 Aresta* Grafo::busca_Aresta(Vertice* Origem,Vertice* destino){
-	Aresta* aresta = NULL;
 
+	Aresta* aresta = NULL;
 	list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
 
 	   while ( posicao_Aresta != lista_Arestas.end() )
@@ -171,7 +181,14 @@ Aresta* Grafo::busca_Aresta(Vertice* Origem,Vertice* destino){
 			 aresta = *posicao_Aresta;
 			 break;
 		  }
+		  if(direcionado)
+		  {
+			  if(*posicao_Aresta)->getOrigem()->getId() == destino->getId() )  and
+		   ( (*posicao_Aresta)->getDestino()->getId() ==  Origem->getId() ))
 
+			aresta = *posicao_Aresta;
+			break;
+		  }
 		  posicao_Aresta++;
 	   }
 
@@ -192,7 +209,11 @@ Vertice* Grafo::busca_Adjacencia( Vertice* u){
 			 idAdjacente = buscar_Vertice( (*posicao_Aresta)->getDestino()->getId() );
 			 break;
 		  }
-
+		  if ( !direcionado )
+		  {
+			  if ( ( (*posicao_Aresta)->getOrigem()->getId() == u->getId() )  and // verificar isso depois
+			  	( (*posicao_Aresta)->getDestino()->getVisitado() == false ))
+		  }
 		  posicao_Aresta++;
 	   }
 
@@ -248,7 +269,7 @@ void Grafo::busca_Profundidade( Vertice *u ){ // função que visita recursivament
 	u->setVisitado(true);
 	u->setImput( ++TEMPO  );
 
-	Vertice* v = buscar_Adjacencia( u );
+	Vertice* v = busca_Adjacencia( u );
 		if ( v->getVisitado() == false  )
 		{
 
@@ -308,8 +329,8 @@ void Grafo::componemte_Conexo(){
 
 //=======================================================================================
 
-void Grafo::busca_Largura(){
-	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+void Grafo::busca_Largura( int vertice_Origem ){
+		list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
 		while ( posicao_vertice != lista_Vertices.end() )
 		{
 			posicao_vertice->setVisitado(false);
@@ -349,6 +370,7 @@ void Grafo::inicializa_Vertice_Fonte( Vertice * fonte){
 	while ( posicao_vertice != lista_Vertices.end() )
 		{
 		posicao_vertice->setEstimativa(INFINITO);
+		posicao_vertice->setVisitado(false);
 		}
 	fonte->setEstimativa(0);
 };
@@ -390,7 +412,7 @@ void Grafo::Dijkstra(int vertice_Origem){
 	{
 		Vertice* u = Fila.top;
 		conjuntoResposta.push_back(u); //lista
-		Vertice* v = buscar_Adjacencia(u);
+		Vertice* v = busca_Adjacencia(u);
 
 		if ( v == NULL)
 				{
@@ -446,7 +468,6 @@ bool Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
 void arvore_Geradora_Minima( int vertice_Origem){
 		Vertice * fonte = buscar_Vertice(vertice_Origem);
 		inicializar_Vertice_Fonte( fonte);
-		list < Vertice *> conjuntoResposta;
 		priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila; // cria a fila de prioridade
 		list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
 
@@ -460,8 +481,7 @@ void arvore_Geradora_Minima( int vertice_Origem){
 
 		{
 			Vertice* u = Fila.top;
-			conjuntoResposta.push_back(u); //lista
-			Vertice* v = buscar_Adjacencia(u);
+			Vertice* v = busca_Adjacencia(u);
 
 			if ( v == NULL)
 					{
@@ -471,9 +491,17 @@ void arvore_Geradora_Minima( int vertice_Origem){
 				else
 					{
 						v->setVisitado(true);
+						Aresta* w = busca_Aresta(u,v);
+						if( v->getEstimativa() > w->getPeso() )
+						{
+							v->setPredecessor(u);
+							v->setEstimativa( w->getPeso());
+						}
+
 					}
 		}
 
+		lista_Arvore.push_back(u); // arrumo depois
 		cout << "Distancia do Vertice " fonte->getId() "para todos os outros: " << endl;
 		list<Vertice *>::iterator posicao_vertice = conjuntoResposta.begin();
 

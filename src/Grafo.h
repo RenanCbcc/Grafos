@@ -15,6 +15,7 @@
 class Grafo {
 public:
 	Grafo();
+	Grafo(bool direcionado);
 	int numero_Arestas(); // Feito!
 	int numero_Vertices(); // Feito!
 	//==========================================================
@@ -44,7 +45,7 @@ public:
 	Aresta * busca_Aresta(Vertice* Origem,Vertice* destino) //Feito!
 	void busca_Profundidade(); //Feito!
 	Vertice *busca_Profundidade( Vertice *u )
-	void busca_Largura(); //  Feito!
+	void busca_Largura(int vertice_Origem); //  Feito!
 	bool busca_cicloHamiltoniano(); // Nao Feito!
 	bool busca_cicloEuleriano(); // Quase Feito!
 	//==========================================================
