@@ -29,7 +29,7 @@ public:
 	void setEstimativa(int in );
 	int  getEstimativa();
 
-	void setPredecessor();
+	void setPredecessor( Vertice * v);
 	int  getPredecessor();
 
 

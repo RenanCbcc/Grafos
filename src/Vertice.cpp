@@ -39,7 +39,7 @@ void Vertice::setEstimativa(int in){
 	this->estimativa = in;
 };
 
-void Vertice::setPredecessor( int u){
+void Vertice::setPredecessor( Vertice * u ){
 	predecessores.push_back(u);
 };
 //=========================================================
@@ -67,7 +67,7 @@ int Vertice::getEstimativa(){
 	return this.estimativa
 };
 
-int Vertice::getPredecessor(){
+vertice* Vertice::getPredecessor(){
 	return predecessores.front();
 }
 //=========================================================
