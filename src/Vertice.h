@@ -7,7 +7,8 @@
 
 #ifndef VERTICE_H_
 #define VERTICE_H_
-#include <vector>;
+#include<iostream>
+#include <vector>
 using namespace std;
 
 class Vertice {
@@ -30,15 +31,15 @@ public:
 	int  getEstimativa();
 
 	void setPredecessor( Vertice * v);
-	int  getPredecessor();
+	Vertice*  getPredecessor();
 
 
 private:
-	vector <int> predecessores;
+	vector <Vertice*> predecessores;
 	int id;		// identificador do vertice
 	int imput; // tempo inicial de busca do vertice para busca em profundidade;
 	int output;// tempo final de busca do vertice para busca em profundidade;
-	int estimativa // tempo de um vertice Dijkstra;
+	int estimativa; // tempo de um vertice Dijkstra;
 	bool visitado;
 
 };

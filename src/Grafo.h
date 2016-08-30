@@ -6,6 +6,7 @@
  */
 #include "Vertice.h"
 #include "Aresta.h"
+#include <iostream>
 #include <list> //Para lista de adjacia
 #include <queue> //Para Djikstra(?)
 #include <stack> // Para achar componemtes conexos
@@ -28,34 +29,35 @@ public:
 	void inicializa_Vertice_Fonte( Vertice * s ); //Feito!
 	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra( int vertice_Origem ); //Feito!;
-	void ordenaÁ„o_Topologica(); // N„o Feito!
 	void grafo_Transposto(); // Feito
 	void arvore_Geradora_Minima(); // Feito!
-	void imprimi_Grafo(int vertice_Origem, int vertice_Destino); // Quase Feito!;
+	void imprimir_Grafo(int vertice_Origem, int vertice_Destino); // Quase Feito!;
+	void componemte_Conexo(); // Quase feito;
 	//==========================================================
 	// fun√ßoes Bool
-	bool esta_vazio(); // Feito!
+	bool esta_Vazio(); // Feito!
 	bool busca_ciclo(); //Feito!
-	bool eh_conexo(); // Feito!
+	bool eh_Conexo(); // Feito!
 	bool Bellman_Ford( Vertice* s); // Feito!
 	//==========================================================
 	// fun√ßoes Busca
 	Vertice* busca_Vertice ( int vertice_Origem ); // Feito!
-	Vertice* busca_Adjacente( int identificador); // Feito!//vertice adj n„o visitado
-	Aresta * busca_Aresta(Vertice* Origem,Vertice* destino) //Feito!
-	void busca_Profundidade(); //Feito!
-	Vertice *busca_Profundidade( Vertice *u )
+	Vertice* busca_Adjacente( Vertice *u ); // Feito!//vertice adj n„o visitado
+	Aresta * busca_Aresta(Vertice* Origem,Vertice* destino); //Feito!
+	void busca_Profundidade(void); //Feito!
+	void busca_Profundidade( Vertice *u );
 	void busca_Largura(int vertice_Origem); //  Feito!
 	bool busca_cicloHamiltoniano(); // Nao Feito!
 	bool busca_cicloEuleriano(); // Quase Feito!
 	//==========================================================
 
 private:
-	bool orientado;
-	list<Vertice *> lista_Vertices;
-	list<Aresta *> lista_Arestas;
-	list<Aresta *> lista_Arvore;
+	bool direcionado;
+	list <Vertice *> lista_Vertices;
+	list <Aresta *> lista_Arestas;
+	list <Aresta *> lista_Arvore;
 	stack <Vertice*> pilha_Vertices;
+
 };
 
 #endif /* GRAFO_H_ */

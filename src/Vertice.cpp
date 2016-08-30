@@ -20,11 +20,11 @@ Vertice::Vertice(  int id ) {
 // funçoes set
 //=========================================================
 void Vertice::setImput( int in){
-	this.imput = in;
+	this->imput = in;
 };
 
 void Vertice::setOutput( int out){
-	this.out = out;
+	this->output = out;
 };
 
 void Vertice::setVisitado(bool vis){
@@ -40,7 +40,7 @@ void Vertice::setEstimativa(int in){
 };
 
 void Vertice::setPredecessor( Vertice * u ){
-	predecessores.push_back(u);
+	this->predecessores.push_back(u);
 };
 //=========================================================
 
@@ -48,11 +48,11 @@ void Vertice::setPredecessor( Vertice * u ){
 //=========================================================
 
 int Vertice::getImput(){
-	return this.imput;
+	return this->imput;
 };
 
 int Vertice::getOutput(){
-	return this.output;
+	return this->output;
 };
 
 int Vertice::getId(){
@@ -60,15 +60,15 @@ int Vertice::getId(){
 };
 
 bool Vertice::getVisitado(){
-	return this.visitado;
+	return this->visitado;
 };
 
 int Vertice::getEstimativa(){
-	return this.estimativa
+	return this->estimativa;
 };
 
-vertice* Vertice::getPredecessor(){
-	return predecessores.front();
+Vertice* Vertice::getPredecessor(){
+	return this->predecessores.front();
 }
 //=========================================================
 

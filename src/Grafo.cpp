@@ -14,27 +14,19 @@ using namespace std;
 
 Grafo::Grafo() {
 	// TODO Auto-generated constructor stub
-	this.direcionado = true;
-	lista_Vertices = new list <Vertices*>;
-	lista_Arestas = new list <Arestas*>;
-	lista_Arvore = new listlist <Arestas*>;
-	pilha_Vertices = new stack < Vertices*>;
-};
+	this->direcionado = true;
+	};
 //=======================================================================================
 
 Grafo::Grafo(bool direcionado) {
 	// TODO Auto-generated constructor stub
-	this.direcionado = direcionado ;
-	lista_Vertices = new list <Vertices*>;
-	lista_Arestas = new list <Arestas*>;
-	lista_Arvore = new listlist <Arestas*>;
-	pilha_Vertices = new stack < Vertices*>;
-}
+	this->direcionado = direcionado ;
+};
 
 //=======================================================================================
 
-int Grafo::numero_Aerstas(){
-	return lista_Arestas.size();
+int Grafo::numero_Arestas(){
+	return this->lista_Arestas.size();
 };
 //=======================================================================================
 
@@ -51,32 +43,32 @@ void Grafo::adiciona_Vetice(){
 
 void Grafo::remove_Vertice( int identificador){
 
-	list< Aresta *>:: itarator posicao_Aresta = lista_Vertices.begin();
+	list< Aresta* >::iterator posicao_Aresta = this->lista_Arestas.begin();
 	Vertice* origem;
 	Vertice* destino;
 
-	while( posicao_Aresta != lista_Arestas.begin() )
+	while( posicao_Aresta != this->lista_Arestas.end() )
 	{
-		origem = posicao_Aresta->getOrigem();
-		destino = posicao_Aresta->getDestino();
-		if ( origem->getId() == id or destino->getId() == id )
+		origem = (*posicao_Aresta)->getOrigem();
+		destino = (*posicao_Aresta)->getDestino();
+		if ( origem->getId() == identificador or destino->getId() == identificador )
 			lista_Arestas.erase(posicao_Aresta);
 
 		posicao_Aresta++;
 	}
 
-	lista_Vertices.erase(buscar_Vertice(int identificador));
+	this->busca_Vertice(identificador);
 
 };
 //=======================================================================================
 
 Vertice* Grafo::busca_Vertice( int identificador )
 {
-	Vertice* retorno  = null;
+	Vertice* retorno;
 	list< Vertice *>::iterator posicao_Vertice = lista_Vertices.begin();
 	while ( posicao_Vertice != lista_Vertices.end() )
 	{
-	  if ( (posicao_Vertice)->getId() == identificador )
+	  if ( (*posicao_Vertice)->getId() == identificador )
 	  {
 		 retorno = (*posicao_Vertice);
 		 break;}
@@ -90,44 +82,32 @@ Vertice* Grafo::busca_Vertice( int identificador )
 
 void Grafo::adiciona_Aresta( int idOrigem, int idDestino, int peso ){
 
-	Vertice* origem = busca_vertice( idOrigem );
-	Vertice* destino = busca_vertice( idDestino );
+	Vertice* origem = busca_Vertice( idOrigem );
+	Vertice* destino = busca_Vertice( idDestino );
 
-	if ( origem == NULL and destino == NULL )
-			{
-			cout << "Erro na função injetora"; << endl; break;
-			}
+	Aresta *aresta = new Aresta(origem,destino, peso);
+	this->lista_Arestas.push_back(aresta);
 
-	else if ( direcionado = false)
+	if ( direcionado == false)
 	{
-
-			Aresta *aresta = new Aresta(origem,destino, peso);
-			lista_Arestas.push_back( aresta );
-			Aresta *aresta = new Aresta(destino,origem, peso);
-			lista_Arestas.push_back( aresta );
-			numero_Aresta++;
+		Aresta *aresta = new Aresta(destino,origem, peso);
+		lista_Arestas.push_back( aresta );
 	}
 
-	else
-
-	{
-		Aresta *aresta = new Aresta(origem,destino, peso);
-		numero_Aresta++;
-	}	lista_Arestas.push_back( aresta );
 
 };
 //=======================================================================================
 
 void Grafo::remove_Aresta(int idOrigem, int idDestino){
 
-	list< Aresta *>::iterator posicao_Aresta = lista_Aresta.begin();
+	list< Aresta *>::iterator posicao_Aresta = this->lista_Arestas.begin();
 
-	if ( orientado = false) // verifica se a aresta tem deireção
+	if ( this->direcionado == false) // verifica se a aresta tem deireção
 	{
 
 		while( posicao_Aresta != lista_Arestas.begin() )
 		{
-
+				// termino depois
 		}
 
 
@@ -137,10 +117,17 @@ void Grafo::remove_Aresta(int idOrigem, int idDestino){
 	{
 		while( posicao_Aresta != lista_Arestas.begin() )
 		{
-			if ( posicao_Aresta->getOrigem() == idOrigem or posicao_Aresta->getDestino() == idDestino )
-				lista_Arestas.erase(posicao_Aresta);
-			break;
+			if ((*posicao_Aresta)->getOrigem()->getId() == idOrigem or (*posicao_Aresta)->getDestino()->getId() == idDestino)
+			{
+				this->lista_Arestas.erase(posicao_Aresta);
+				break;
+
+			}
+
+			else
+			{
 			posicao_Aresta++;
+			}
 		}
 
 	}
@@ -149,7 +136,7 @@ void Grafo::remove_Aresta(int idOrigem, int idDestino){
 
 
 bool Grafo::esta_Vazio(){
-	return ( lista_Vertices.size() == 0 );
+	return ( this->lista_Vertices.size() == 0 );
 };
 //=======================================================================================
 
@@ -159,32 +146,34 @@ bool Grafo::eh_Conexo(){
 	}
 
 	else
-	list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
+	{
+	list< Aresta *>::iterator posicao_Aresta = lista_Arestas.begin();
 
-		   while ( posicao_Aresta != lista_Arestas.end() ){
+		   while ( posicao_Aresta != this->lista_Arestas.end() ){
 			   // terminar de implementar!
 		   }
-
+	return true;
+	}
 };
 //=======================================================================================
 Aresta* Grafo::busca_Aresta(Vertice* Origem,Vertice* destino){
 
 	Aresta* aresta = NULL;
-	list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
+	list< Aresta *>::iterator posicao_Aresta = this->lista_Arestas.begin();
 
 	   while ( posicao_Aresta != lista_Arestas.end() )
 	   {
 
-		  if (*posicao_Aresta)->getOrigem()->getId() == Origem->getId() )  and
-		   ( (*posicao_Aresta)->getDestino()->getId() == destino->getId() ))
+		  if ( (*posicao_Aresta)->getOrigem()->getId() == Origem->getId()   and
+		    (*posicao_Aresta)->getDestino()->getId() == destino->getId() )
 		  {
 			 aresta = *posicao_Aresta;
 			 break;
 		  }
 		  if(direcionado)
 		  {
-			  if(*posicao_Aresta)->getOrigem()->getId() == destino->getId() )  and
-		   ( (*posicao_Aresta)->getDestino()->getId() ==  Origem->getId() ))
+			  if ( (*posicao_Aresta)->getOrigem()->getId() == destino->getId()   and
+		   ( (*posicao_Aresta)->getDestino()->getId() ==  Origem->getId() ) )
 
 			aresta = *posicao_Aresta;
 			break;
@@ -197,22 +186,25 @@ Aresta* Grafo::busca_Aresta(Vertice* Origem,Vertice* destino){
 };
 //=======================================================================================
 
-Vertice* Grafo::busca_Adjacencia( Vertice* u){
-	Vertice* Adjacente = NULL;
-	   list<ArestaGrafo *>::iterator posicao_Aresta = lista_Arestas.begin();
+Vertice* Grafo::busca_Adjacente( Vertice* u){
+		Vertice* Adjacente = NULL;
+	   list< Aresta *>::iterator posicao_Aresta = this->lista_Arestas.begin();
 
 	   while ( posicao_Aresta != lista_Arestas.end() )
 	   {
 		  if ( ( (*posicao_Aresta)->getOrigem()->getId() == u->getId() )  and
 			   ( (*posicao_Aresta)->getDestino()->getVisitado() == false ))
 		  {
-			 idAdjacente = buscar_Vertice( (*posicao_Aresta)->getDestino()->getId() );
+			  Adjacente = this->busca_Adjacente( (*posicao_Aresta)->getDestino());
 			 break;
 		  }
 		  if ( !direcionado )
 		  {
 			  if ( ( (*posicao_Aresta)->getOrigem()->getId() == u->getId() )  and // verificar isso depois
 			  	( (*posicao_Aresta)->getDestino()->getVisitado() == false ))
+
+			Adjacente = this->busca_Adjacente((*posicao_Aresta)->getDestino());
+			break;
 		  }
 		  posicao_Aresta++;
 	   }
@@ -223,10 +215,10 @@ Vertice* Grafo::busca_Adjacencia( Vertice* u){
 
 void Grafo::busca_Profundidade(){
 
-	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+	list<Vertice *>::iterator posicao_vertice = this->lista_Vertices.begin();
 
 	while ( posicao_vertice != lista_Vertices.end() ){
-		lista_Vertices->setVisitado(false);
+		(*posicao_vertice)->setVisitado(false);
 		posicao_vertice++;
 	}
 
@@ -234,9 +226,9 @@ void Grafo::busca_Profundidade(){
 
 	while ( posicao_vertice != lista_Vertices.end() )
 	{
-		if ( posicao_vertice.getVisitado() == false ) // verica se o vertice jah foi visitado
+		if ( (*posicao_vertice)->getVisitado() == false ) // verica se o vertice jah foi visitado
 		{
-			buscar_Profundidade( posicao_vertice ); // método recursivo;
+			this->busca_Profundidade((*posicao_vertice)); // método recursivo;
 		}
 		posicao_vertice++;
 	}
@@ -265,15 +257,15 @@ void Grafo::busca_Profundidade(){
 
 };
 
-void Grafo::busca_Profundidade( Vertice *u ){ // função que visita recursivamente os vertice
+void Grafo::busca_Profundidade(Vertice *u){ // função que visita recursivamente os vertice
 	u->setVisitado(true);
 	u->setImput( ++TEMPO  );
 
-	Vertice* v = busca_Adjacencia( u );
+	Vertice* v = this->busca_Adjacente( u );
 		if ( v->getVisitado() == false  )
 		{
 
-			v->setPredecessor(u->getId());
+			v->setPredecessor(u);
 			busca_Profundidade( v );
 		}
 	u->setVisitado(true);
@@ -281,63 +273,62 @@ void Grafo::busca_Profundidade( Vertice *u ){ // função que visita recursivament
 };
 //=======================================================================================
 
-void Grafo::imprimi_Grafo(int vertice_Origem,int vertice_Destino){
+void Grafo::imprimir_Grafo(int vertice_Origem,int vertice_Destino){
 
 	if ( vertice_Origem == vertice_Destino)
 	{
 		cout << "[" << vertice_Origem << "]" << endl;
 	}
 
-	Vertice * destino = buscar_Vertice(vertice_Destino);
+	Vertice* destino = busca_Vertice(vertice_Destino);
 
-	else if ( destino->predecessores.empty )
+
+	if ( destino->getPredecessor() )
 	{
 		cout << "Não existe caminho de [" << vertice_Origem <<"] para: " << vertice_Destino << endl;
 	}
 
 	else
 	{
-		imprimir_Grafo(vertice_Origem,destino.getPredecessor() )
-		cout << "[" << destino.getPredecessor() << "]" << endl;
+		imprimir_Grafo( vertice_Origem, destino->getPredecessor()->getId() );
+		cout << "[" << destino->getPredecessor() << "]" << endl;
 	}
 
 };
 //=======================================================================================
 
 void Grafo::grafo_Transposto(){
-	list< Aresta *>::iterator posicao_Aresta = lista_Aresta.begin();
+	list< Aresta *>::iterator posicao_Aresta = this->lista_Arestas.begin();
 	Vertice * aux_origem;
 	Vertice * aux_destino;
 
 		while( posicao_Aresta != lista_Arestas.begin() )
 		{
-			aux_origem = posicao_Aresta->getOrigem();
-			aux_destino = posicao_Aresta->getDestino();
-			posicao_Aresta.Aresta(aux_destino,aux_origem,0);
-			posicao_Aresta++
+			aux_origem = (*posicao_Aresta)->getOrigem();
+			aux_destino = (*posicao_Aresta)->getDestino();
+			(*posicao_Aresta)->setOrigem(aux_destino);
+			(*posicao_Aresta)->setDestino(aux_origem);
+			posicao_Aresta++;
 		{
-
-
 };
 
-void Grafo::componemte_Conexo(){
-	busca_Profundidade();
-	grafo_Transposto();
-
-
-};
+//void Grafo::componemte_Conexo(){
+//	this->grafo_Transposto();
+//};
 
 //=======================================================================================
-
 void Grafo::busca_Largura( int vertice_Origem ){
-		list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
+
+		list< Vertice*>::iterator posicao_vertice = this->lista_Vertices.begin();
+
 		while ( posicao_vertice != lista_Vertices.end() )
 		{
-			posicao_vertice->setVisitado(false);
-			posicao_vertice->setEstimativa(INFINITO);
+			(*posicao_vertice)->setVisitado(false);
+			(*posicao_vertice)->setEstimativa(INFINITO);
+			posicao_vertice++;
 		}
 
-	Vertice * fonte = buscar_Vertice(vertice_Origem);
+	Vertice * fonte = busca_Vertice(vertice_Origem);
 	fonte->setVisitado(true);
 	fonte->setEstimativa(0);
 	priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila;//ordenan vertices por menor prioridade
@@ -369,8 +360,8 @@ void Grafo::inicializa_Vertice_Fonte( Vertice * fonte){
 
 	while ( posicao_vertice != lista_Vertices.end() )
 		{
-		posicao_vertice->setEstimativa(INFINITO);
-		posicao_vertice->setVisitado(false);
+		(*posicao_vertice)->setEstimativa(INFINITO);
+		(*posicao_vertice)->setVisitado(false);
 		}
 	fonte->setEstimativa(0);
 };
@@ -396,7 +387,7 @@ struct Comp_Prioridade
 
 void Grafo::Dijkstra(int vertice_Origem){
 
-	Vertice * fonte = buscar_Vertice(vertice_Origem);
+	Vertice * fonte = busca_Vertice(vertice_Origem);
 	inicializar_Vertice_Fonte( fonte);
 	list < Vertice *> conjuntoResposta;
 	priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila; // cria a fila de prioridade
@@ -437,8 +428,8 @@ void Grafo::Dijkstra(int vertice_Origem){
 };
 //=======================================================================================
 
-bool Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
-	inicializar_Vertice_Fonte(graph,fonte);
+bool Grafo::Bellman_Ford(Vertice* fonte){
+	inicializar_Vertice_Fonte(fonte);
 
 	for ( int i=0; i< numero_Vertices()-1; i++ )
 	{
@@ -455,6 +446,8 @@ bool Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
 	list< Aresta *>::iterator posicao_Aresta = lista_Arestas.begin();
 	while ( posicao_Aresta != lista_Arestas.end() )
 	{
+		Vertice* u = (*posicao_Aresta)->getOrigem();
+		Vertice* v = (*posicao_Aresta)->getdestino();
 		if (u->getEstimativa() > v->getEstimativa() + w->getPeso())
 			{
 				return false;
@@ -466,7 +459,7 @@ bool Grafo::Bellman_Ford( Grafo graph, Vertice* fonte){
 //=======================================================================================
 
 void arvore_Geradora_Minima( int vertice_Origem){
-		Vertice * fonte = buscar_Vertice(vertice_Origem);
+		Vertice * fonte = busca_Vertice(vertice_Origem);
 		inicializar_Vertice_Fonte( fonte);
 		priority_queue< Vertice* , vector<Vertice*>, Comp_Prioridade> Fila; // cria a fila de prioridade
 		list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
@@ -605,6 +598,7 @@ bool busca_ciclo(){
 		}
 
 };
+
 void Grafo::Limpar(){
 	//deleta arestas
 	   list< Aresta *>::iterator posicao_Aresta = lista_Arestas.begin();
@@ -631,11 +625,16 @@ void Grafo::Limpar(){
 	   lista_Vertices.clear();
 
 };
-Grafo::~Grafo() {
+
+Grafo::~Grafo(); {
 	// TODO Auto-generated destructor stub
 	lista_Arestas.clear();
 	lista_Vertices.clear();
 	cout << "Destrutor chamado..." << endl;
 };
+
+
+
+
 //=======================================================================================
 

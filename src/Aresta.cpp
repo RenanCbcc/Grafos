@@ -7,13 +7,6 @@
 
 #include "Aresta.h"
 
-Aresta::Aresta (){
-	this->origem = null;
-	this->destino = null;
-	this->peso = null;
-
-};
-
 Aresta::Aresta(Vertice *origem, Vertice *destino, int peso) {
 	// TODO Auto-generated constructor stub
 	this->origem = origem;
@@ -40,4 +33,12 @@ int Aresta::getPeso(){
 
 void Aresta::setPeso(int p){
 	this->peso = p;
+};
+
+void Aresta::setOrigem( Vertice *u){
+	this->origem = u;
+};
+
+void Aresta::setDestino( Vertice *v){
+	this->destino = v;
 };
