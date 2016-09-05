@@ -12,7 +12,7 @@ Vertice::Vertice(){
 	setOutput(0);
 };
 
-Vertice::Vertice(  int id ) {
+Vertice::Vertice(  string id ) {
 	// TODO Auto-generated constructor stub
 	setId( id );
 };
@@ -31,7 +31,7 @@ void Vertice::setVisitado(bool vis){
 	this->visitado = vis;
 };
 
-void Vertice::setId(int id){
+void Vertice::setId(string id){
 	this->id = id;
 };
 
@@ -55,7 +55,7 @@ int Vertice::getOutput(){
 	return this->output;
 };
 
-int Vertice::getId(){
+string Vertice::getId(){
 	return this->id;
 };
 

@@ -7,6 +7,7 @@
 #include "Vertice.h"
 #include "Aresta.h"
 #include <iostream>
+#include <string>
 #include <list> //Para lista de adjacia
 #include <queue> //Para Djikstra(?)
 #include <stack> // Para achar componemtes conexos
@@ -22,17 +23,17 @@ public:
 	//==========================================================
 	//funçoes Void
 	void adiciona_Vetice(); // Feito!
-	void remove_Vertice( int identificador); // Feito!
-	void adiciona_Aresta( int vertice_Origem, int vertide_Destino, int peso); // Feito!
+	void remove_Vertice( string identificador); // Feito!
+	void adiciona_Aresta( string vertice_Origem, string vertide_Destino, int peso); // Feito!
 	void remove_Aresta( int vertice_Origem, int vertice_Destino); // Feito!
-	void limpar(); // Feito!
 	void inicializa_Vertice_Fonte( Vertice * s ); //Feito!
 	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra( int vertice_Origem ); //Feito!;
 	void grafo_Transposto(); // Feito
 	void arvore_Geradora_Minima(); // Feito!
-	void imprimir_Grafo(int vertice_Origem, int vertice_Destino); // Quase Feito!;
+	void imprimir_Grafo(string vertice_Origem, string vertice_Destino); // Quase Feito!;
 	void componemte_Conexo(); // Quase feito;
+	void limpar_Grafo(); // feito
 	//==========================================================
 	// funçoes Bool
 	bool esta_Vazio(); // Feito!
@@ -41,12 +42,12 @@ public:
 	bool Bellman_Ford( Vertice* s); // Feito!
 	//==========================================================
 	// funçoes Busca
-	Vertice* busca_Vertice ( int vertice_Origem ); // Feito!
+	Vertice* busca_Vertice ( string vertice_Origem ); // Feito!
 	Vertice* busca_Adjacente( Vertice *u ); // Feito!//vertice adj n�o visitado
 	Aresta * busca_Aresta(Vertice* Origem,Vertice* destino); //Feito!
 	void busca_Profundidade(void); //Feito!
 	void busca_Profundidade( Vertice *u );
-	void busca_Largura(int vertice_Origem); //  Feito!
+	void busca_Largura(string vertice_Origem); //  Feito!
 	bool busca_cicloHamiltoniano(); // Nao Feito!
 	bool busca_cicloEuleriano(); // Quase Feito!
 	//==========================================================

@@ -13,13 +13,13 @@ using namespace std;
 
 class Vertice {
 public:
-	Vertice( int id );
+	Vertice( string id );
 	Vertice();
 	void setVisitado( bool valor );
 	bool getVisitado();
 
-	void setId(int id);
-	int  getId();
+	void setId(string id);
+	string  getId();
 
 	void setImput( int in );
 	int getImput();
@@ -36,7 +36,7 @@ public:
 
 private:
 	vector <Vertice*> predecessores;
-	int id;		// identificador do vertice
+	string id;		// identificador do vertice
 	int imput; // tempo inicial de busca do vertice para busca em profundidade;
 	int output;// tempo final de busca do vertice para busca em profundidade;
 	int estimativa; // tempo de um vertice Dijkstra;
