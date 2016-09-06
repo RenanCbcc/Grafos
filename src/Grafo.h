@@ -21,7 +21,7 @@ public:
 	int numero_Arestas(); // Feito!
 	int numero_Vertices(); // Feito!
 	//==========================================================
-	//funçoes Void
+	//funÃ§oes Void
 	void adiciona_Vetice(); // Feito!
 	void remove_Vertice( string identificador); // Feito!
 	void adiciona_Aresta( string vertice_Origem, string vertide_Destino, int peso); // Feito!
@@ -30,20 +30,20 @@ public:
 	void relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w); // Feito!
 	void Dijkstra( int vertice_Origem ); //Feito!;
 	void grafo_Transposto(); // Feito
-	void arvore_Geradora_Minima(); // Feito!
+	void arvore_Geradora_Minima(string vertice_Origem); // Feito!
 	void imprimir_Grafo(string vertice_Origem, string vertice_Destino); // Quase Feito!;
 	void componemte_Conexo(); // Quase feito;
 	void limpar_Grafo(); // feito
 	//==========================================================
-	// funçoes Bool
+	// funÃ§oes Bool
 	bool esta_Vazio(); // Feito!
 	bool busca_ciclo(); //Feito!
 	bool eh_Conexo(); // Feito!
 	bool Bellman_Ford( Vertice* s); // Feito!
 	//==========================================================
-	// funçoes Busca
+	// funÃ§oes Busca
 	Vertice* busca_Vertice ( string vertice_Origem ); // Feito!
-	Vertice* busca_Adjacente( Vertice *u ); // Feito!//vertice adj n�o visitado
+	Vertice* busca_Adjacente( Vertice *u ); // Feito!//vertice adj não visitado
 	Aresta * busca_Aresta(Vertice* Origem,Vertice* destino); //Feito!
 	void busca_Profundidade(void); //Feito!
 	void busca_Profundidade( Vertice *u );
