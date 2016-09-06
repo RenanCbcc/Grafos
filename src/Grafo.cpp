@@ -102,7 +102,7 @@ void Grafo::remove_Aresta(int idOrigem, int idDestino){
 
 	list< Aresta *>::iterator posicao_Aresta = this->lista_Arestas.begin();
 
-	if ( this->direcionado == false) // verifica se a aresta tem deireÁ„o
+	if ( this->direcionado == false) // verifica se a aresta tem deire√ß√£o
 	{
 
 		while( posicao_Aresta != lista_Arestas.begin() )
@@ -222,13 +222,13 @@ void Grafo::busca_Profundidade(){
 		posicao_vertice++;
 	}
 
-	posicao_vertice = lista_Vertices.begin();// volta para posiÁ„o inicial da lista
+	posicao_vertice = lista_Vertices.begin();// volta para posi√ß√£o inicial da lista
 
 	while ( posicao_vertice != lista_Vertices.end() )
 	{
 		if ( (*posicao_vertice)->getVisitado() == false ) // verica se o vertice jah foi visitado
 		{
-			this->busca_Profundidade((*posicao_vertice)); // mÈtodo recursivo;
+			this->busca_Profundidade((*posicao_vertice)); // m√©todo recursivo;
 		}
 		posicao_vertice++;
 	}
@@ -257,7 +257,7 @@ void Grafo::busca_Profundidade(){
 
 };
 
-void Grafo::busca_Profundidade(Vertice *u){ // funÁ„o que visita recursivamente os vertice
+void Grafo::busca_Profundidade(Vertice *u){ // fun√ß√£o que visita recursivamente os vertice
 	u->setVisitado(true);
 	u->setImput( ++TEMPO  );
 
@@ -285,7 +285,7 @@ void Grafo::imprimir_Grafo( string vertice_Origem, string vertice_Destino){
 
 	if ( destino->getPredecessor() )
 	{
-		cout << "N„o existe caminho de [" << vertice_Origem <<"] para: " << vertice_Destino << endl;
+		cout << "N√£o existe caminho de [" << vertice_Origem <<"] para: " << vertice_Destino << endl;
 	}
 
 	else
@@ -332,25 +332,25 @@ void Grafo::busca_Largura( string vertice_Origem ){
 	Vertice * fonte = this->busca_Vertice(vertice_Origem);
 	fonte->setVisitado(true);
 	fonte->setEstimativa(0);
-	this->lista_Vertices.sort();
 
-	priority_queue< Vertice* , vector <Vertice*> , Comp > queue(comp);//ordenan vertices por menor prioridade
-	queue(fonte);
 
-	while( !Fila. )
+	priority_queue<Vertice*> queue;//ordenan vertices por menor prioridade
+
+
+	while( queue.empty() )
 		{
-			Vertice* u = Fila.top(); // recebe o primeiro elemento da fila
-			Vertice* v = busca_Adjacente(u); // funÁ„o retorna NULL se n„o existe adj
+			Vertice* u = queue.top(); // recebe o primeiro elemento da fila
+			Vertice* v = busca_Adjacente(u); // fun√ß√£o retorna NULL se n√£o existe adj
 			if ( v == NULL)
 			{
-				Fila.pop(); // retira o primeiro elemento da fila
+				queue.pop(); // retira o primeiro elemento da fila
 			}
 			else
 			{
 				v->setVisitado(true);
-				v->getEstimativa( ++TEMPO);
-				v->setPredecessor(u->getId());
-				Fila.push(v);
+				v->setEstimativa(++TEMPO);
+				v->setPredecessor(u);
+				queue.push(v);
 			}
 		u->setVisitado(true);
 
@@ -381,35 +381,35 @@ void Grafo::relaxa_Vertice(Vertice* u,Vertice* v,Aresta* w){
 };
 
 
-bool operator<(const Vertice* u, const Vertice* v)
+/*bool operator>(const Vertice *u, const Vertice *v)
 {
-  return u->getEstimativa() > v->getEstimativa();
+  return ( u.getEstimativa() > v.getEstimativa());
 }
+*/
 
-
-void Grafo::Dijkstra(int vertice_Origem){
+void Grafo::Dijkstra( string vertice_Origem){
 
 	Vertice * fonte = this->busca_Vertice(vertice_Origem);
 	this->inicializa_Vertice_Fonte( fonte);
 	list < Vertice *> conjuntoResposta;
-	priority_queue< Vertice* , vector<Vertice*>, Comp > Fila; // cria a fila de prioridade
+	priority_queue< Vertice*> queue; // cria a fila de prioridade
 	list<Vertice *>::iterator posicao_vertice = lista_Vertices.begin();
 	while ( posicao_vertice != lista_Vertices.end() )
 		{
-			Fila.push_back(posicao_vertice); // insere todos os vertices na fila de prioridade
+			queue.push( (*posicao_vertice)); // insere todos os vertices na fila de prioridade
 			posicao_vertice++;
 		}
 
-	while( ! Fila.empty() )
+	while( !queue.empty() )
 
 	{
-		Vertice* u = Fila.top;
+		Vertice* u = queue.top();
 		conjuntoResposta.push_back(u); //lista
 		Vertice* v = this->busca_Adjacente(u);
 
 		if ( v == NULL)
 				{
-					Fila.pop(); // retiro vertice sem adj da fila
+				queue.pop(); // retiro vertice sem adj da fila
 				}
 
 			else
@@ -463,30 +463,31 @@ bool Grafo::Bellman_Ford(Vertice* fonte){
 	}
 	return true;
 
-};
-//=======================================================================================
+}
 
-void arvore_Geradora_Minima( int vertice_Origem){
+//=======================================================================================
+void Grafo::arvore_Geradora_Minima( string vertice_Origem ){
+
 		Vertice* fonte = this->busca_Vertice(vertice_Origem);
-		this->inicializar_Vertice_Fonte( fonte);
-		priority_queue< Vertice* , vector<Vertice*>, Comp > Fila; // cria a fila de prioridade
-		list<Vertice *>::iterator posicao_vertice = this->lista_Vertices.begin();
+		this->inicializa_Vertice_Fonte(fonte);
+		priority_queue< Vertice> queue; // cria a fila de prioridade
+		list<Vertice>::iterator posicao_vertice = this->lista_Vertices.begin();
 
 		while ( posicao_vertice != lista_Vertices.end() )
 			{
-				Fila.(posicao_vertice); // insere todos os vertices na fila de prioridade
+			queue.push( (*posicao_vertice) ); // insere todos os vertices na fila de prioridade
 				posicao_vertice++;
 			}
 
-		while( ! Fila.empty() )
+		while( ! queue.empty() )
 
 		{
-			Vertice* u = Fila.top;
-			Vertice* v = this->busca_Adjacencia(u);
+			Vertice* u = queue.top();
+			Vertice* v = this->busca_Adjacente(u);
 
 			if ( v == NULL)
 					{
-						Fila.pop(); // retiro vertice sem adj da fila
+					queue.pop(); // retiro vertice sem adj da fila
 					}
 
 				else
@@ -502,11 +503,11 @@ void arvore_Geradora_Minima( int vertice_Origem){
 					}
 		}
 
-		lista_Arvore.push_back(u); // arrumo depois
-		cout << "Distancia do Vertice " fonte->getId() "para todos os outros: " << endl;
-		list<Vertice *>::iterator posicao_vertice = conjuntoResposta.begin();
+		this->lista_Arvore; // arrumo depois
+		cout << "√Årvore Geradora M√≠nima "<< endl;
+		list<Vertice *>::iterator posicao_Arvore = lista_Arvore.begin();
 
-		while ( posicao_vertice != conjuntoResposta.end())
+		while ( posicao_vertice != lista_Arvore.end())
 		{
 			cout << "[ " <<fonte->getId() <<"]------------>["<< posicao_vertice->getId() <<"] : " << posicao_vertice->getEstimativa() << endl;
 			posicao_vertice++;
@@ -589,18 +590,18 @@ bool Grafo::busca_cicloEuleriano(){
 bool busca_ciclo(){
 		list<Vertice*>::iterator posicao_vertice = this->lista_Vertices.begin();
 
-		while ( posicao_vertice != lista_Vertices.end() ){
-			lista_Vertices->setVisitado(false);
+		while ( posicao_vertice != lista_Vertices ){
+			(*posicao_vertice)->setVisitado(false);
 			posicao_vertice++;
 		}
 
-		posicao_vertice = lista_Vertices.begin();// volta para posiÁ„o inicial da lista
+		posicao_vertice = lista_Vertices.begin();// volta para posi√ß√£o inicial da lista
 
 		while ( posicao_vertice != lista_Vertices.end() )
 		{
 			if ( posicao_vertice.getVisitado() == false ) // verica se o vertice jah foi visitado
 			{
-				this->buscar_Profundidade( posicao_vertice ); // mÈtodo recursivo;
+				this->buscar_Profundidade( posicao_vertice ); // m√©todo recursivo;
 			}
 			posicao_vertice++;
 		}
