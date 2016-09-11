@@ -17,6 +17,15 @@ Vertice::Vertice(  string id ) {
 	setId( id );
 };
 
+bool Vertice::operator<( Vertice& rhs )
+{  return (this->getEstimativa() < rhs.getEstimativa()); }
+
+
+bool Vertice::operator == ( Vertice& v)
+{
+    return ( v.getEstimativa() == this->getEstimativa());
+
+}
 // funçoes set
 //=========================================================
 void Vertice::setImput( int in){

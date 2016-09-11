@@ -16,6 +16,11 @@ public:
 	Vertice( string id );
 	Vertice();
 	void setVisitado( bool valor );
+
+	bool operator<( Vertice& v ) ;
+
+	bool operator == (Vertice & v);
+
 	bool getVisitado();
 
 	void setId(string id);
