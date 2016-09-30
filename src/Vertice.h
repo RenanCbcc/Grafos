@@ -18,8 +18,10 @@ public:
 	void setVisitado( bool valor );
 
 	bool operator<( Vertice& v ) ;
+	
+	bool operator>( Vertice& v ) ;
 
-	bool operator == (Vertice & v);
+	bool operator == (Vertice& v);
 
 	bool getVisitado();
 
