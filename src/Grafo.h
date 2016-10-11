@@ -34,6 +34,7 @@ public:
 	void arvore_Geradora_Minima( string vertice_Origem ); // Feito!
 	void imprimir_Grafo(string vertice_Origem, string vertice_Destino); // Quase Feito!;
 	void componemte_Conexo(); // Quase feito;
+	void ponto_Articulação();
 	void limpar_Grafo(); // feito
 	//==========================================================
 	// funÃ§oes Bool
