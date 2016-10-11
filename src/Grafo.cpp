@@ -228,7 +228,7 @@ Vertice* Grafo::busca_Adjacente( Vertice* u){
 };
 //=======================================================================================
 
-void Grafo::busca_Profundidade(){
+void Grafo::busca_Profundidade(void){
 
 	list<Vertice *>::iterator posicao_vertice = this->lista_Vertices.begin();
 
@@ -252,15 +252,14 @@ void Grafo::busca_Profundidade(){
 
 
 };
-
 void Grafo::busca_Profundidade(Vertice *u){ // função que visita recursivamente os vertice
 	u->setVisitado(true);
 	u->setImput( ++TEMPO  );
 
 	Vertice* v = this->busca_Adjacente( u );
-		if ( v->getVisitado() == false  )
+		if ( v->getVisitado() == false  ) // Erroo tem que verificar de v é nulo
 		{
-
+			cout <<"Predecessor de ["<< v->getId()<<"] = " <<u->getId() << endl;
 			v->setPredecessor(u);
 			busca_Profundidade( v );
 		}

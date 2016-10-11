@@ -15,7 +15,7 @@ Aresta::Aresta(Vertice *origem, Vertice *destino, int peso) {
 
 };
 
-// funÃ§Ãµes get
+// funções get
 //=========================================================
 
 Vertice* Aresta::getOrigem(){

@@ -18,8 +18,8 @@ Vertice::Vertice(  string id ) {
 };
 
 bool Vertice::operator<( Vertice& v )
-{  
-	return this->getEstimativa() < v.getEstimativa() ; 
+{
+	return this->getEstimativa() < v.getEstimativa() ;
 }
 
 bool Vertice::operator == ( Vertice& v)
@@ -27,17 +27,18 @@ bool Vertice::operator == ( Vertice& v)
     return v.getEstimativa() == this->getEstimativa() ;
 }
 
-bool Vertice::operator>( const Vertice& v ) 
-{  return this->v.getEstimativa() > v.getEstimativa(); }
+bool Vertice::operator>( Vertice& v )
+{  return this->getEstimativa() > v.getEstimativa(); }
 
 
 friend ostream &operator<<(ostream &stream, Vertice v)
 {
-  stream << v.Identificador << ' ' << v.Estimativa << '\n';
+  stream << v.getId() << ' ' << v.getEstimativa()
+		  << '('<<v.getImput()<<'/' << v.getOutput() << ')' <<endl ;
 
   return stream;
 }
-// funÃ§oes set
+// funçoes set
 //=========================================================
 void Vertice::setImput( int in){
 	this->imput = in;
@@ -64,7 +65,7 @@ void Vertice::setPredecessor( Vertice * u ){
 };
 //=========================================================
 
-// funÃ§oes get
+// funçoes get
 //=========================================================
 
 int Vertice::getImput(){
