@@ -4,5 +4,6 @@
 1. `void InsereAresta()`
 1. `void BuscaProfundidade()`
 1. `void BuscaLargura()`
+1. `void ArvoreGeradoraMinima()`
 1. `void Dijkstra()`
-*(Termino quando tiver vontade...)
+* _(Termino quando tiver vontade...)
